@@ -1,7 +1,8 @@
+mod elf;
+
 use elf::{reader::ElfCaloriesReader, elf::Elf};
 use std::vec::Vec;
 
-mod elf;
 
 
 fn main() {
