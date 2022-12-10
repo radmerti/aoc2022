@@ -1,4 +1,4 @@
-use super::game::Move;
+use super::game::{Move, Outcome};
 use std::io::{BufRead, Error};
 use std::{fs::File, io, path::Path};
 
@@ -18,7 +18,7 @@ impl Reader {
 }
 
 impl Iterator for Reader {
-    type Item = (Move, Move);
+    type Item = (Move, Outcome);
 
     fn next(&mut self) -> Option<Self::Item> {
         let line = self.lines.next()?;
@@ -41,9 +41,9 @@ impl Iterator for Reader {
         };
 
         let move_b = match moves[1] {
-            "X" => Move::Rock,
-            "Y" => Move::Paper,
-            "Z" => Move::Scissors,
+            "X" => Outcome::WinA,
+            "Y" => Outcome::Draw,
+            "Z" => Outcome::WinB,
             _ => return None,
         };
 

@@ -1,6 +1,6 @@
 use core::fmt;
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub enum Move {
     Rock,
     Paper,
@@ -55,6 +55,20 @@ impl Game {
             score_a,
             score_b,
         })
+    }
+
+    pub fn move_for(&self, move_a: &Move, outcome: &Outcome) -> Move {
+        match (move_a, outcome) {
+            (Move::Rock, Outcome::WinA) => Move::Scissors,
+            (Move::Rock, Outcome::Draw) => Move::Rock,
+            (Move::Rock, Outcome::WinB) => Move::Paper,
+            (Move::Paper, Outcome::WinA) => Move::Rock,
+            (Move::Paper, Outcome::Draw) => Move::Paper,
+            (Move::Paper, Outcome::WinB) => Move::Scissors,
+            (Move::Scissors, Outcome::WinA) => Move::Paper,
+            (Move::Scissors, Outcome::Draw) => Move::Scissors,
+            (Move::Scissors, Outcome::WinB) => Move::Rock,
+        }
     }
 }
 

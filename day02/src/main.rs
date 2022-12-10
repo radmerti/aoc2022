@@ -22,7 +22,9 @@ fn main() {
 
     let (mut score_a, mut score_b): (u32, u32) = (0, 0);
 
-    for (round_i, (move_a, move_b)) in reader.enumerate() {
+    for (round_i, (move_a, outcome)) in reader.enumerate() {
+        let move_b = game.move_for(&move_a, &outcome);
+
         let result = match game.play(&move_a, &move_b) {
             Ok(result) => result,
             Err(error) => {
